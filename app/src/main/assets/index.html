@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebP to JPG</title>
+    <style>body { font-family: sans-serif; text-align: center; padding: 20px; }</style>
+</head>
+<body>
+    <h2>WebP to JPG Converter</h2>
+    <input type="file" id="upload" accept="image/webp">
+    <br><br>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <a id="download" style="display:none; padding:10px; background:green; color:white; text-decoration:none;">Download JPG</a>
+
+    <script>
+        const upload = document.getElementById('upload');
+        const canvas = document.getElementById('canvas');
+        const download = document.getElementById('download');
+
+        upload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    const jpgUrl = canvas.toDataURL('image/jpeg', 0.9);
+                    download.href = jpgUrl;
+                    download.download = "converted.jpg";
+                    download.style.display = "inline-block";
+                    download.innerText = "Download JPG";
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
