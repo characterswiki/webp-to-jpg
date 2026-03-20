@@ -5,19 +5,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: set up JDK 17
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          
+
+      - name: Generate Gradle Wrapper
+        # This creates the gradlew file so you don't have to upload it manually
+        run: gradle wrapper
+
+      - name: Make Gradlew Executable
+        run: chmod +x gradlew
+
       - name: Build Debug APK
         run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: my-app-apk
+          name: My-Converter-App
           path: app/build/outputs/apk/debug/app-debug.apk
