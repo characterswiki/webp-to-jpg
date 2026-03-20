@@ -1,12 +1,37 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
+
 android {
+    // This must match your Java package name
     namespace 'com.example.app'
-    compileSdk 33
+    compileSdk 34
+
     defaultConfig {
         applicationId "com.example.app"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    
+    // Required for modern Java features
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // Keeping it minimal as requested—no heavy libraries
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 }
