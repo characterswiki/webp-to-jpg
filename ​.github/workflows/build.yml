@@ -15,7 +15,6 @@ jobs:
           distribution: 'temurin'
 
       - name: Generate Gradle Wrapper
-        # This creates the gradlew file so you don't have to upload it manually
         run: gradle wrapper
 
       - name: Make Gradlew Executable
