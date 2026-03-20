@@ -1,6 +1,9 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
+    namespace 'com.lighting2026.webtojpg'
     compileSdk 34
 
     defaultConfig {
@@ -13,12 +16,11 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
         }
     }
 }
 
 dependencies {
-    // no extra dependencies needed
 }
